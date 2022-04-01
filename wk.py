@@ -104,11 +104,12 @@ for x in ['1','2']:
         count = 0
         for a in range(0, size1_count):
             count += 1
+            ts = time.time()
             print("正在 " + str(location) + " 区域创建第 " + str(count)
                   + f" 个 {size1_name} 实例，共 " + str(size1_count) + " 个")
             get_default_cli().invoke(
                 ['vm', 'create', '--resource-group', 'myResourceGroup', '--name',
-                 f'{location}-{size1_abbreviation}-{count}', '--image', 'UbuntuLTS',
+                 f'{location}-{size1_abbreviation}-{int(ts)}', '--image', 'UbuntuLTS',
                  '--size', f'{size1_name}', '--location', f'{location}', '--admin-username',
                  'azureuser', '--admin-password', '6uPF5Cofvyjcew9', '--custom-data',
                  'cloud-init.txt', "--no-wait"])
@@ -116,11 +117,12 @@ for x in ['1','2']:
             count = 0
             for a in range(0, size2_count):
                 count += 1
+                ts = time.time()
                 print("正在 " + str(location) + " 区域创建第 " + str(count)
                       + f" 个 {size2_name} 实例，共 " + str(size2_count) + " 个")
                 get_default_cli().invoke(
                     ['vm', 'create', '--resource-group', 'myResourceGroup', '--name',
-                     f'{location}-{size2_abbreviation}-{count}', '--image', 'UbuntuLTS',
+                     f'{location}-{size2_abbreviation}-{int(ts)}', '--image', 'UbuntuLTS',
                      '--size', f'{size2_name}', '--location', f'{location}', '--admin-username',
                      'azureuser', '--admin-password', '6uPF5Cofvyjcew9', '--custom-data',
                      'cloud-init.txt', "--no-wait"])
@@ -147,6 +149,5 @@ print("\n\n---------------------------------------------------------------------
  
  
 # 如果想删除脚本创建的所有资源，取消注释以下语句
-# get_default_cli().invoke(['group', 'delete', '--name', 'myResourceGroup',
-# '--no-wait', '--yes'])
+# get_default_cli().invoke(['group', 'delete', '--name', 'myResourceGroup', '--no-wait', '--yes'])
 # print("删除资源组成功")
