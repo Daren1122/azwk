@@ -7,7 +7,7 @@ from azure.cli.core import get_default_cli
 # 1.检查配额以确定订阅类型，并确定要开的虚拟机数量
 # 初始化区域列表，共12个区域
 # Azure for Students和即用即付订阅均不支持 South India 和 West India 区域
-locations = ['australiacentral', 'australiaeast', 'australiaeast', 'eastasia', 'japaneast', 'koreacentral', 'southindia', 'switzerlandnorth', 'uaenorth', 'uksouth', 'ukwest', 'westeurope']
+locations = ['eastasia','japaneast','australiaeast','australiacentral','southindia','koreacentral','uaenorth','germanywestcentral']
  
 limit = "4" 
 # 默认每个区域的配额都相同，因此只需查询美国东部地区的配额
