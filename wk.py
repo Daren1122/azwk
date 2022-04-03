@@ -14,9 +14,8 @@ f = io.StringIO()
 with redirect_stdout(f):
     get_default_cli().invoke(['vm', 'list-usage', '--location', 'Australia Rast', '--query',
                               '[?localName == \'Total Regional vCPUs\'].limit'])
-    limit = "10"
-
- 
+   
+limit = "10"
 # 免费试用订阅每个区域的vCPU总数为4，与标准FSv2系列的vCPUs相同
 # 因此创建1个Standard_F4s_v2实例（共占用4个vCPUs）
 if '4' in limit:
