@@ -8,19 +8,26 @@ from azure.cli.core import get_default_cli
 # 初始化区域列表，共8个区域
 # Azure for Students和即用即付订阅均不支持 South India 和 West India 区域
 locations = ['australiacentral', 'australiaeast', 'australiaeast', 'eastasia', 'japaneast', 'koreacentral', 'southindia', 'switzerlandnorth', 'uaenorth', 'uksouth', 'ukwest', 'westeurope']
- 
-# 捕获 get_default_cli().invoke 的标准输出
-f = io.StringIO()
-with redirect_stdout(f):
-    get_default_cli().invoke(['vm', 'list-usage', '--location', 'Australia Rast', '--query',
-                              '[?localName == \'Total Regional vCPUs\'].limit'])
    
 limit = "10"
+# 即用即付订阅每个区域的vCPU总数为10，与标准FSv2系列的vCPUs相同
+# 因此创建一个Standard_F8s_v2实例（占用8个vCPUs），
+# 一个Standard_F2s_v2实例（占用2个vCPUs）
+elif '10' in limit:
+    print("当前订阅为即用即付")
+    size1_name = "Standard_F8s_v2"
+    size1_abbreviation = "F8s_v2"
+    size1_count = 1
+    size2_name = "Standard_F2s_v2"
+    size2_abbreviation = "F2s_v2"
+    size2_count = 1
+    type = 1
+ 
 # 免费试用订阅每个区域的vCPU总数为4，与标准FSv2系列的vCPUs相同
 # 因此创建1个Standard_F4s_v2实例（共占用4个vCPUs）
-if '4' in limit:
-    print("当前订阅为免费试用，每个区域的配额仅为4 vCPUs，建议升级后再用。"
-          "若升级后仍看到本消息，请等待十分钟再运行脚本。")
+elif '4' in limit:
+#   print("当前订阅为免费试用，每个区域的配额仅为4 vCPUs，建议升级后再用。"
+#         "若升级后仍看到本消息，请等待十分钟再运行脚本。")
 #   selection = input("输入Y继续运行，任意键退出")
 #   if selection != "Y" or "y":
 #       exit(0)
@@ -39,6 +46,7 @@ else:
           "f.getvalue()为'区域配额'（包括英文引号）。Azure for"
           " Students是6，即用即付是10，免费试用订阅是4")
     exit(0)
+
  
 # 2.创建资源组
 # 资源组只是资源的逻辑容器,资源组内的资源不必与资源组位于同一区域
