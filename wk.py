@@ -39,9 +39,6 @@ for dname in dnames:
     # 除非订阅被禁用，其他任何情况下创建资源组都会成功（重名也返回成功）
     print("创建资源组成功")
     for location in locations:
-        for i in range(5, -1, -1):
-            print("\r等待{}秒,创建下一个".format(i), end="", flush=True)
-            time.sleep(1)
         count = 0
         for a in range(0, size_count):
             count += 1
